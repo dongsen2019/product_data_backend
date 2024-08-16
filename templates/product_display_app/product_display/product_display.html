@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品展示页面</title>
+    <link rel="stylesheet" href="/static/css/BaseCss/Normalize.css">
+    <link rel="stylesheet" href="/static/css/product_display/product_display.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="left-nav-bar">
+<!--            左侧导航栏标题-->
+            <div class="title">
+                    <img src="/static/assets/src-icon/商品资料库logo.png" alt="" class="font-pic">
+            </div>
+<!--            左侧导航栏ul列表-->
+            <div>
+                <ul class="nbf">
+                    <li class="user_management">
+                        <a href="{% url 'user_management:index' %}">
+                            <div>
+                                <img src="/static/assets/src-icon/user_mg.png" alt="" class="user_mg">
+                                <span>用户管理</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="display current-func">
+                        <img src="/static/assets/src-icon/pr.png" alt="" class="user_mg">
+                        <span>商品展示</span>
+                    </li>
+
+                    <li class="back-mg">
+                        <img src="/static/assets/src-icon/后台管理.png" alt="" class="user_mg">
+                        <span>后台管理</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-page">
+<!--            右侧头部-->
+            <div class="page-head">
+<!--            右侧头部功能名称-->
+                <div class="func-name">
+                    <span>商品展示</span>
+                </div>
+            </div>
+<!--            商品展示页面-->
+            <div class="product-display">
+<!--                左侧图片区域-->
+                <div class="product-images">
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/0.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/1.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/2.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/3.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/4.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/5.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/6.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/7.jpg" alt="">
+                    </div>
+                    <div class="image-index">
+                        <img src="/static/assets/src-images/8.jpg" alt="">
+                    </div>
+                </div>
+<!--                商品展示页面的右侧商品简介区域-->
+                <div class="product-intro">
+                    <div class="intro-inner">
+                        <div class="name">中号皮革手袋</div>
+                        <div class="barcode">商品条码: 80888888_C20601</div>
+                        <div class="group_sn">国际码: 80888888</div>
+                        <div class="brand_alias">品牌别名: Burberry</div>
+                        <div class="dept_name">大类: 包</div>
+                        <div class="big_category">中类: 大包</div>
+                        <div class="small_category">小类: 单肩包</div>
+                        <div class="col">颜色: 棕色</div>
+                        <div class="size">尺寸: 中号</div>
+                        <div class="season">季节: 四季</div>
+                        <div class="gender">性别: 女</div>
+                        <div class="market_price">市场价: 8888</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

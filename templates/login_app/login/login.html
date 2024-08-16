@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>01-login</title>
+    <link rel="stylesheet" href="/static/css/login/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="pane">
+            <ul class="tabs">
+                <li class="current">登录</li>
+                <li class="">注册</li>
+            </ul>
+
+            <div class="login-rgs">
+                <div class="current" id="login">
+                    <form action="{% url 'login:index' %}" method="get">
+                        {% csrf_token %}
+                        <label class="account">
+                            <span class="iconfont icon-zhanghao"></span>
+                            <input type="text" name="account" class="account" placeholder="请输入账号">
+                        </label>
+
+                        <label class="pwd">
+                            <span class="iconfont icon-mimaicon"></span>
+                            <input type="password" name="pwd" class="pwd" placeholder="请输入密码">
+                        </label>
+
+                        <input type="submit" class="submit" value="登录">
+
+                        {{ pwd_error|safe }}
+                    </form>
+                </div>
+                <div class="" id="register">
+                    <form action="">
+                        <label>
+                            <span class="iconfont icon-zhanghao"></span>
+                            <input type="text" name="account" class="account" placeholder="请输入账号">
+                        </label>
+
+                        <label>
+                            <span class="iconfont icon-mimaicon"></span>
+                            <input type="password" name="pwd" class="pwd" placeholder="请输入密码">
+                        </label>
+
+                        <label>
+                            <span class="iconfont icon-mimaicon"></span>
+                            <input type="password" name="pwd-again" class="again" placeholder="请再次输入密码">
+                        </label>
+
+                        <label>
+                            <span class="iconfont icon-wodetuandui"></span>
+                            <input type="text" name="dept" class="dept" placeholder="请输入部门">
+                        </label>
+
+                        <label>
+                            <span class="iconfont icon-woicon"></span>
+                            <input type="text" name="full-name" class="full-name" placeholder="请输入姓名">
+                        </label>
+
+                        <input type="submit" class="submit" value="注册">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0 //current类的初始位置
+
+        let tabs = document.querySelectorAll(".pane .tabs li")
+        let pages = document.querySelectorAll(".pane .login-rgs div")
+
+        for (let i = 0; i < tabs.length; i++) {
+            let tab = tabs[i]
+            let page = pages[i]
+
+            tab.onclick = function () {
+                tabs[currentIndex].className = "";
+                tab.className = "current"
+
+                pages[currentIndex].className = "";
+                page.className = "current"
+
+                currentIndex = i
+            }
+        }
+    </script>
+</body>
+</html>
+

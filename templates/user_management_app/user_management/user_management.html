@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>06-用户管理页面</title>
+    <link rel="stylesheet" href="../../../static/css/user_management/user_management.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="left-nav-bar">
+            <!--            左侧导航栏标题-->
+            <div class="title">
+                <img src="/static/assets/images/display_logo.png" alt="" class="font-pic">
+            </div>
+            <!--            左侧导航栏ul列表-->
+            <div class="category">
+                <ul class="nbf">
+                    <li class="user_management current-func">
+                        <img src="/static/assets/images/user_mg.png" alt="" class="user_mg">
+                        <span>用户管理</span>
+                    </li>
+
+
+                    <li class="display">
+                        <a href="{% url 'product_display:index' %}">
+                            <div>
+                                <img src="/static/assets/images/product_display.png" alt="" class="user_mg">
+                                <span>商品展示</span>
+                            </div>
+                        </a>
+                    </li>
+
+
+                    <li class="back-mg">
+                        <img src="/static/assets/images/back-management.png" alt="" class="user_mg">
+                        <span>后台管理</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-page">
+            <!--            右侧头部-->
+            <div class="page-head">
+                <!--            右侧头部功能名称-->
+                <div class="func-name">
+                    <span>用户管理</span>
+                </div>
+            </div>
+            <!--            商品展示页面-->
+            <div class="change-pw">
+                <form action="#">
+                    <div class="pwd-format">
+                        <span>密码由8-15个字符组成，区分大小写</span>
+                        <span>密码首位必须是字母</span>
+                        <span>密码请不要包含特殊字符</span>
+                        <span>修改密码不可以使用之前旧密码</span>
+                    </div>
+                    <label>
+                        请您输入旧密码:<input type="password" name="oldpw">
+                    </label>
+
+                    <label>
+                        请您输入新密码:<input type="password" name="newpw">
+                    </label>
+
+                    <label>
+                        再次确认新密码:<input type="password" name="newpw-ag">
+                    </label>
+
+                    <input type="submit" value="保存">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

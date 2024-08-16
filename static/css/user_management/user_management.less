@@ -1,0 +1,234 @@
+@import "../BaseCss/base_css.css";
+@import "../../config/Color/color";
+
+/*外层容器*/
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: darkcyan;
+
+  display: flex;
+
+  /*左侧导航栏区域*/
+  /*左侧导航栏区域*/
+  .left-nav-bar {
+    height: 100vh;
+    width: 136px;
+    background-color: @themeColor;
+
+
+    /*左侧导航栏的标题图标区域*/
+    &>.title {
+      width: 100%;
+      height: 46px;
+      background-color: transparent;
+      text-align: center;
+
+      &>img.font-pic {
+        width: 136px;
+        height: 46px;
+        background-color: transparent;
+      }
+    }
+
+    /*ul去除样式*/
+    &>.category>.nbf {
+      list-style: none;
+      /*background-color: salmon;*/
+      margin: 0;
+      padding: 0;
+
+      /*ul列表li标签的样式*/
+      li {
+        display: block;
+        width: 100%;
+        height: 40px;
+        /*background-color: #ffffff;*/
+        margin-bottom: 20px;
+
+        cursor: pointer;
+
+        /*当前功能改变背景色和字体颜色*/
+        &.current-func {
+          background-color: rgb(51,112,255);
+          span {
+            color: white;
+          }
+        }
+
+        /*去除a标签的下划线*/
+        a {
+          text-decoration: none;
+        }
+
+        /*ul列表li标签光标在区域内时变色*/
+        &:hover {
+          background-color: rgb(32,54,116);
+        }
+
+        &:hover span {
+          color: #ffffff;
+        }
+
+        /*第一个li标签的上外边距单独设置*/
+        &.user_management {
+          margin-top: 10px;
+        }
+
+        /*导航栏第一个功能的图标*/
+        img {
+          /*margin-top: 8px;*/
+          margin-left: 12px;
+          margin-right: 6px;
+          width: 20px;
+          height: 20px;
+          /*background-color: lightgreen;*/
+          vertical-align: middle;
+        }
+
+        span {
+          /*display: inline-block;*/
+          /*width: 70px;*/
+          /*height: 40px;*/
+          /*background-color: tomato;*/
+          font-size: 14px;
+          font-family: "PingFang SC","微软雅黑",sans-serif;
+          color: rgb(186,187,196);
+          /*vertical-align: top;*/
+          line-height: 40px;
+        }
+      }
+    }
+  }
+
+  /*右侧页面区域*/
+  .right-page {
+    height: 100%;
+    background-color: rgb(242,247,255);
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    /*页面区域的头部*/
+    /*页面区域的头部*/
+    .page-head {
+      height: 46px;
+      width: 100%;
+      background-color: #ffffff;
+      border-bottom: 2px solid rgb(233,237,242);
+
+      position: fixed;
+      //top: 12px;
+      //margin-left: 20px;
+
+      overflow: hidden;
+
+      z-index: 99;
+
+      /*右侧展示区域的头部 功能名称区域*/
+      &>.func-name {
+        width: 61px;
+        height: 20px;
+        /*background-color: #cccccc;*/
+
+        //margin-top: 13px;
+        //margin-left: 20px;
+
+        /*功能名称前的小蓝标*/
+        &::before {
+          content: "";
+          width: 3.5px;
+          height: 12px;
+          display: block;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 20px;
+
+          border-radius: 17px;
+          margin-right: 5.5px;
+          background-color: rgb(51,112,255);
+        }
+
+        /*功能名称span标签*/
+        &>span {
+          height: 20px;
+          display: block;
+
+          position: absolute;
+          left:30px;
+          top: 50%;
+          transform: translateY(-50%);
+
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          font-family: "PingFang SC","微软雅黑",sans-serif;
+          line-height: 20px;
+          color: rgb(78,89,105);
+        }
+      }
+    }
+
+    /*页面区域下部,展示区域*/
+    &>.change-pw {
+      width: 100%;
+      height: 900px;
+      background-color: rgb(248,250,254);
+
+      flex: 1;
+
+      position: relative; /*该元素子元素为绝对定位*/
+
+      form {
+        width: 100%;
+        height: 420px;
+
+        margin-top: 70px;
+        margin-left: 20px;
+
+        //background-color: darkcyan;
+
+        .pwd-format {
+          width: 100%;
+          //height: 100px;
+          background-color: transparent;
+
+          span {
+            display: block;
+            margin-left: 10px;
+            font-size: 15px;
+          }
+        }
+
+        label {
+          display: block;
+          margin-top: 20px;
+          margin-left: 10px;
+          font-size: 15px;
+          font-family: "Microsoft YaHei", sans-serif;
+
+          &>input {
+            margin-left: 10px;
+            outline: none;
+          }
+        }
+
+        &>input {
+          width: 60px;
+          height: 30px;
+          background-color: @themeColor;
+          color: white;
+          margin: 20px 10px;
+
+          border: none;
+          outline: none;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
