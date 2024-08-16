@@ -51,9 +51,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'login_app.middleware.SessionValidationMiddleware',
 ]
 
 ROOT_URLCONF = 'product_data_backend.urls'
+
+LOGIN_URL = '/login/'  # 这个路径应与登录页面的URL相对应
 
 TEMPLATES = [
     {
