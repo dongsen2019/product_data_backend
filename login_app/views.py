@@ -1,6 +1,9 @@
+import datetime
+
 from django.shortcuts import render, HttpResponse, redirect
 from login_app.models import *
 from django.db.models import Q, F
+from django.contrib.sessions.models import Session
 
 # Create your views here.
 
@@ -11,6 +14,12 @@ def index(request):
         response_home = redirect('product_display:index')
 
         user_session = request.session.get('user', None)
+        print(request.session.values())
+        print(request.session.session_key)
+
+        print(Session.objects.values())
+        for s in Session.objects.values():
+            print(s['expire_date'] > datetime.datetime.now())
 
         if user_session is None:
 
