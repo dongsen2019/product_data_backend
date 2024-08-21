@@ -14,15 +14,17 @@ def index(request):
         sptm = para_dict.get("sptm")
         ftm = para_dict.get("ftm")
 
+        info_empty = {"name": ("", ""), "group_sn": ("国际码: ", ""),"brand_alias": ("品牌别名: ", ""),
+                      "dept_name": ("大类: ", ""), "big_category_name": ("中类: ", ""),
+                      "small_category_name": ("小类: ", ""), "col": ("颜色:", ""), "season": ("季节", ""),
+                      "gender": ("性别: ", ""), "market_price": ("市场价: ", "")}
+
         # 当 GET 参数为空 或者 无GET参数(字典为空时)
         if request.GET.dict() == {} or (gjm == "" and sptm == "" and ftm == ""):
             context = {
                 "get_para": 0,
                 "images_path": ["/static/assets/src-images/blank.jpg" for i in range(9)],
-                "info": {"name": ("", ""), "group_sn": ("国际码: ", ""),
-                         "brand_alias": ("品牌别名: ", ""), "dept_name": ("大类: ", ""), "big_category_name": ("中类: ", ""),
-                         "small_category_name": ("小类: ", ""), "col": ("颜色:", ""), "season": ("季节", ""),
-                         "gender": ("性别: ", ""), "market_price": ("市场价: ", "")},
+                "info": info_empty,
                 # "map": {"name": "", "barcode": "商品条码", "group_sn": "国际码", "brand_alias": "品牌别名", "dept_name": "大类",
                 #         "big_category": "中类", "small_category": "小类", "col": "颜色", "size": "尺寸", "season": "季节",
                 #         "gender": "性别", "market_price": "市场价"},
@@ -58,20 +60,27 @@ def index(request):
 
             result = PDC.objects.filter(Q_filter).values()
 
-            product_info = result[1]
+            print(result)
 
-            info_dict = {
-                "name": ("", product_info.get("name")),
-                "group_sn": ("国际码: ", product_info.get("group_sn")),
-                "brand_alias": ("品牌别名: ", product_info.get("brand_alias")),
-                "dept_name": ("大类: ", product_info.get("dept_name")),
-                "big_category_name": ("中类: ", product_info.get("big_category_name")),
-                "small_category_name": ("小类: ", product_info.get("small_category_name")),
-                "col": ("颜色:", product_info.get("col")),
-                "season": ("季节", product_info.get("season")),
-                "gender": ("性别: ", product_info.get("gender")),
-                "market_price": ("市场价: ", product_info.get("market_price")),
-            }
+            if len(result) == 0:
+                product_info = {"group_sn": ""}
+
+                info_dict = info_empty
+            else:
+                product_info = result[0]
+
+                info_dict = {
+                    "name": ("", product_info.get("name")),
+                    "group_sn": ("国际码: ", product_info.get("group_sn")),
+                    "brand_alias": ("品牌别名: ", product_info.get("brand_alias")),
+                    "dept_name": ("大类: ", product_info.get("dept_name")),
+                    "big_category_name": ("中类: ", product_info.get("big_category_name")),
+                    "small_category_name": ("小类: ", product_info.get("small_category_name")),
+                    "col": ("颜色:", product_info.get("col")),
+                    "season": ("季节", product_info.get("season")),
+                    "gender": ("性别: ", product_info.get("gender")),
+                    "market_price": ("市场价: ", product_info.get("market_price")),
+                }
 
             # print(info_dict)
 
@@ -112,7 +121,7 @@ def index(request):
                     images_path_list.append(os.path.join(static_images_path, images_list[image_i]))  # 使用静态链接的方法
             else:
                 for i in range(9):
-                    images_path_list.append("/static/assets/src-images/blank.jpg")
+                    images_path_list.append("/assets/src-images/blank.jpg")
 
             print(len(images_path_list))
 
