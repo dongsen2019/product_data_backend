@@ -84,20 +84,23 @@ def index(request):
             # 静态static路径千万记得要 /static 别忘了加前面的斜杠
             print(os.path.isdir(os.path.join(settings.STATIC_URL, "assets", "product_images", product_info.get("group_sn"))))
             images_path = os.path.join(settings.STATIC_URL, "assets", "product_images", product_info.get("group_sn"), "750")
+            static_images_path = os.path.join("assets", "product_images", product_info.get("group_sn"), "750")
             is_exists = os.path.isdir(images_path)
 
+            # 如果路径的存在,获取路径下的所有文件
             images_path_list = []
             if is_exists is True:
                 print(os.listdir(images_path))
                 images_list = os.listdir(images_path)
                 print(images_list)
 
+                # 去除缓存文件
                 if 'Thumbs.db' in images_list:
                     images_list.remove('Thumbs.db')
 
                 images_count = len(images_list)
 
-                # print(images_count)
+                # print(images_count) 如果 images_count 大于 9, 则设置数量为 9
 
                 if images_count > 9:
                     images_count = 9
@@ -105,18 +108,21 @@ def index(request):
                 # print(images_count)
 
                 for image_i in range(images_count):
-                    images_path_list.append(os.path.join("/", images_path, images_list[image_i]))
+                    # images_path_list.append(os.path.join("/", images_path, images_list[image_i]))
+                    images_path_list.append(os.path.join(static_images_path, images_list[image_i]))  # 使用静态链接的方法
             else:
                 for i in range(9):
                     images_path_list.append("/static/assets/src-images/blank.jpg")
 
             print(len(images_path_list))
 
+            # 如果图片数量小于9, 则计算剩余的空白图片数量
             surplus = 9 - len(images_path_list)
 
+            # 如果剩余数不为0,则追加空白图片链接地址
             if surplus != 0:
                 for i in range(surplus):
-                    images_path_list.append("/static/assets/src-images/blank.jpg")
+                    images_path_list.append("assets/src-images/blank.jpg")
 
             context = {
                 "get_para": 1,

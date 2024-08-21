@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +81,7 @@
                     {% elif get_para == 1 %}
                         {% for image in images_path %}
                             <div class="image-index">
-                                <img src="{{image}}" alt="">
+                                <img src="{% static image %}" alt="">
                             </div>
                         {% endfor %}
                     {% endif %}
