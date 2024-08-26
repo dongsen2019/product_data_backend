@@ -9,7 +9,7 @@ from django.contrib.sessions.models import Session
 
 def index(request):
     if request.method == "GET":
-        response_home = redirect('product_display:index')
+        response_home = redirect('product_display:func_display')
 
         user_session = request.session.session_key
         # print(f"user_session是否为空:{user_session}")

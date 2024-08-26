@@ -6,5 +6,6 @@ app_name = "product_display"
 # 子路由去掉总路由的前缀路径
 urlpatterns = [
     # 固定路径路由, 不带动态参数设计方案
-    path('', index, name='index'),
+    path('', func_display, name='func_display'),
+    path('tmzs', index, name='index'),
 ]

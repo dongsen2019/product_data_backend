@@ -5,6 +5,10 @@ import os
 from product_data_backend import settings
 
 
+def func_display(request):
+    return render(request, "product_display_app/function_display/function_display.html")
+
+
 # Create your views here.
 def index(request):
     if request.method == "GET":
@@ -60,7 +64,7 @@ def index(request):
 
             result = PDC.objects.filter(Q_filter).values()
 
-            print(result)
+            # print(result)
 
             if len(result) == 0:
                 product_info = {"group_sn": ""}
@@ -99,13 +103,20 @@ def index(request):
             # 如果路径的存在,获取路径下的所有文件
             images_path_list = []
             if is_exists is True:
-                print(os.listdir(images_path))
                 images_list = os.listdir(images_path)
                 print(images_list)
 
+                del_ele = []
                 # 去除缓存文件
-                if 'Thumbs.db' in images_list:
-                    images_list.remove('Thumbs.db')
+                for file in images_list:
+                    if not ((file.endswith(".jpg")) or (file.endswith(".png"))):
+                        del_ele.append(file)
+
+                print(del_ele)
+                for ele in del_ele:
+                    images_list.remove(ele)
+
+                print(images_list)
 
                 images_count = len(images_list)
 
