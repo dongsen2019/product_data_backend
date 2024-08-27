@@ -186,7 +186,6 @@ ul.nbf span {
     color: rgb(78,89,105);
     display: inline-flex;
     align-items: center
-
 }
 
 /*参数区域的div*/
@@ -246,6 +245,7 @@ ul.nbf span {
     outline: none;
 }
 
+
 /*右侧展示区域的图片展示区域*/
 .right-page>.product-display>.product-images {
     width: 900px;
@@ -269,12 +269,19 @@ ul.nbf span {
     border: 1px solid rgb(212,216,219);
 }
 
+/*每个img标签外嵌套a标签*/
+.product-images>.image-index>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .product-images>.image-index:hover {
     transform: scale(1.16,1.16)
 }
 
 /*每张图片的大小*/
-.product-images>.image-index>img {
+.product-images>.image-index img {
     width: 100%;
     height: 100%;
 }

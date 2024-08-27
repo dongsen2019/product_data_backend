@@ -18,7 +18,7 @@ def index(request):
         sptm = para_dict.get("sptm")
         ftm = para_dict.get("ftm")
 
-        info_empty = {"name": ("", ""), "group_sn": ("国际码: ", ""),"brand_alias": ("品牌别名: ", ""),
+        info_empty = {"name": ("", ""), "group_sn": ("国际码: ", ""), "brand_alias": ("品牌别名: ", ""),
                       "dept_name": ("大类: ", ""), "big_category_name": ("中类: ", ""),
                       "small_category_name": ("小类: ", ""), "col": ("颜色:", ""), "season": ("季节", ""),
                       "gender": ("性别: ", ""), "market_price": ("市场价: ", "")}
@@ -66,6 +66,7 @@ def index(request):
 
             # print(result)
 
+            # 如果数据库查询的返回结果是0条数据,就返回空字符集字典, 国际码设置为空
             if len(result) == 0:
                 product_info = {"group_sn": ""}
 
@@ -129,10 +130,10 @@ def index(request):
 
                 for image_i in range(images_count):
                     # images_path_list.append(os.path.join("/", images_path, images_list[image_i]))
-                    images_path_list.append(os.path.join(static_images_path, images_list[image_i]))  # 使用静态链接的方法
+                    images_path_list.append([product_info.get("group_sn"), images_list[image_i], os.path.join(static_images_path, images_list[image_i])])  # 使用静态链接的方法
             else:
                 for i in range(9):
-                    images_path_list.append("/assets/src-images/blank.jpg")
+                    images_path_list.append(["empty", "blank.jpg", "/assets/src-images/blank.jpg"])
 
             print(len(images_path_list))
 
@@ -142,7 +143,7 @@ def index(request):
             # 如果剩余数不为0,则追加空白图片链接地址
             if surplus != 0:
                 for i in range(surplus):
-                    images_path_list.append("assets/src-images/blank.jpg")
+                    images_path_list.append(["empty", "blank.jpg", "/assets/src-images/blank.jpg"])
 
             context = {
                 "get_para": 1,
@@ -153,8 +154,28 @@ def index(request):
                 "numbers_info": range(12),
             }
 
+            print(context["images_path"])
+
             return render(request, "product_display_app/product_display/product_display.html", context=context)
 
     elif request.method == "POST":
         return HttpResponse("POST Defined")
+
+
+def image_display(request, group_sn, path_image):
+    print(group_sn, path_image)
+    if group_sn != "empty":
+        image_link = os.path.join("assets", "product_images", group_sn, "750", path_image)
+        context = {
+            "image_link": image_link
+        }
+        return render(request, 'product_display_app/image_display/image_display.html', context=context)
+    else:
+        image_link = os.path.join("assets", "src-images", "blank.jpg")
+        context = {
+            "image_link": image_link
+        }
+        return render(request, 'product_display_app/image_display/image_display.html', context=context)
+
+
 
