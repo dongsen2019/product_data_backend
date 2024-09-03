@@ -17,3 +17,13 @@ class PDC(models.Model):
     gender = models.CharField("性别", max_length=50)
     market_price = models.FloatField(verbose_name="市场价")
     brand_alias = models.CharField("品牌别名", max_length=50)
+
+
+class SameStyle_Detail(models.Model):
+    group_sn = models.CharField("国际码", max_length=100)
+    same_style = models.CharField("同款名称", max_length=50)
+    size = models.CharField("尺寸", max_length=50)
+    is_double = models.CharField("双面", max_length=50)
+    disassembly = models.CharField("扣头拆卸", max_length=50)
+    mark = models.CharField("标识", max_length=50)
+    length = models.CharField("长短", max_length=50)

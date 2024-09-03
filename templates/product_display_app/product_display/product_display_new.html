@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>商品展示页面</title>
-    <link rel="stylesheet" href="/static/css/BaseCss/Normalize.css">
-    <link rel="stylesheet" href="/static/css/product_display/product_display.css">
+<!--    <link rel="stylesheet" href="../../BaseCss/Normalize.css">-->
+    <link rel="stylesheet" href="/static/css/product_display/index.css">
 
 </head>
 <body>
@@ -49,7 +49,7 @@
                     <span>商品展示</span>
                 </div>
             </div>
-            <!--搜索图片的参数栏-->
+
             <div class="para">
                 <form action="{% url 'product_display:index' %}">
                     <label>
@@ -67,9 +67,10 @@
                     <input type="submit" value="查询">
                 </form>
             </div>
-            
 <!--            商品展示页面-->
             <div class="product-display">
+<!--                左侧间隙区域-->
+                <div class="left-space"></div>
 <!--                左侧图片区域-->
                 <div class="product-images">
                     {% if get_para == 0 %}
@@ -88,20 +89,23 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+<!--                中间间隙区域-->
+                <div class="middle-space"></div>
 <!--                商品展示页面的右侧商品简介区域-->
                 <div class="product-intro">
-                    <div class="intro-inner">
-                        {% if get_para == 0 %}
-                            {% for k,v in info.items %}
-                                <div class={{ k }}>{{ v.0 }} {{ v.1 }}</div>
-                            {% endfor %}
-                        {% elif get_para == 1 %}
-                            {% for k,v in info.items %}
-                                <div class={{ k }}>{{ v.0 }} {{ v.1 }}</div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
+                    {% if get_para == 0 %}
+                        {% for k,v in info.items %}
+                            <div class={{ k }}>{{ v.0 }} {{ v.1 }}</div>
+                        {% endfor %}
+                    {% elif get_para == 1 %}
+                        {% for k,v in info.items %}
+                            <div class={{ k }}>{{ v.0 }} 
+                                <span>{{ v.1 }}</span>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
+                <div class="right-space"></div>
             </div>
         </div>
     </div>

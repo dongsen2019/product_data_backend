@@ -255,7 +255,7 @@ ul.nbf span {
 
     position: absolute;
     top: 120px;
-    left: 100px;
+    left: 5px;
 
     display: flex;
     flex-wrap: wrap;
@@ -289,12 +289,12 @@ ul.nbf span {
 
 /*商品介绍区域*/
 .right-page>.product-display>.product-intro {
-    width: 670px;
+    width: 300px;
     height: 100%;
     border: 2px solid rgb(212,216,219);
     background-color: white;
 
-    padding: 200px 200px;
+    padding: 200px 50px;
     box-sizing: border-box;
 
     position: fixed;
@@ -304,7 +304,7 @@ ul.nbf span {
 
 /*商品介绍区域内部信息*/
 .product-display>.product-intro>.intro-inner {
-    width: 400px;
+    width: 300px;
     height: 100%;
     margin: 0 auto;
 

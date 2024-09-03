@@ -36,9 +36,20 @@ def index(request):
                 "numbers_info": range(12),
             }
 
-            return render(request, "product_display_app/product_display/product_display.html", context=context)
+            return render(request, "product_display_app/product_display/product_display_new.html", context=context)
 
         else:
+
+            # 原生sql语句查询
+            g_sn = gjm
+            result = PDC.objects.raw("SELECT * FROM (SELECT * FROM product_display_app_pdc t1 where group_sn = %s limit 1) t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn", [g_sn])
+            print(len(result))
+            for i in result:
+                print(i.same_style)
+
+            """
+            # 使用django的queryset查询
+            
             # 当GET参数不为空时, 取商品PDC信息
             Q_gjm = Q()
             Q_sptm = Q()
@@ -63,6 +74,7 @@ def index(request):
             print(Q_filter)
 
             result = PDC.objects.filter(Q_filter).values()
+            """
 
             # print(result)
 
@@ -72,6 +84,9 @@ def index(request):
 
                 info_dict = info_empty
             else:
+                """
+                # 使用 django 的 queryset 查询
+                
                 product_info = result[0]
 
                 info_dict = {
@@ -86,6 +101,25 @@ def index(request):
                     "gender": ("性别: ", product_info.get("gender")),
                     "market_price": ("市场价: ", product_info.get("market_price")),
                 }
+                """
+                info_dict = {
+                    "name": ("", result[0].name),
+                    "group_sn": ("国际码: ", result[0].group_sn),
+                    "brand_alias": ("品牌别名: ", result[0].brand_alias),
+                    "dept_name": ("大类: ", result[0].dept_name),
+                    # "big_category_name": ("中类: ", result[0].big_category_name),
+                    "small_category_name": ("小类: ", result[0].small_category_name),
+                    "size": ("尺寸: ", result[0].size),
+                    "same_style": ("同款: ", result[0].same_style),
+                    "mark": ("标识: ", result[0].mark),
+                    "is_double": ("双面: ", result[0].is_double),
+                    "disassembly": ("扣头是否拆卸: ", result[0].disassembly),
+                    "length": ("长短: ", result[0].length),
+                    "col": ("颜色:", result[0].col),
+                    "season": ("季节: ", result[0].season),
+                    "gender": ("性别: ", result[0].gender),
+                    "market_price": ("市场价: ", result[0].market_price),
+                }
 
             # print(info_dict)
 
@@ -96,9 +130,9 @@ def index(request):
 
             # 相对路径
             # 静态static路径千万记得要 /static 别忘了加前面的斜杠
-            print(os.path.isdir(os.path.join(settings.STATIC_URL, "assets", "product_images", product_info.get("group_sn"))))
-            images_path = os.path.join(settings.STATIC_URL, "assets", "product_images", product_info.get("group_sn"), "750")
-            static_images_path = os.path.join("assets", "product_images", product_info.get("group_sn"), "750")
+            print(os.path.isdir(os.path.join(settings.STATIC_URL, "assets", "product_images", result[0].group_sn)))
+            images_path = os.path.join(settings.STATIC_URL, "assets", "product_images", result[0].group_sn, "750")
+            static_images_path = os.path.join("assets", "product_images", result[0].group_sn, "750")
             is_exists = os.path.isdir(images_path)
 
             # 如果路径的存在,获取路径下的所有文件
@@ -130,7 +164,7 @@ def index(request):
 
                 for image_i in range(images_count):
                     # images_path_list.append(os.path.join("/", images_path, images_list[image_i]))
-                    images_path_list.append([product_info.get("group_sn"), images_list[image_i], os.path.join(static_images_path, images_list[image_i])])  # 使用静态链接的方法
+                    images_path_list.append([result[0].group_sn, images_list[image_i], os.path.join(static_images_path, images_list[image_i])])  # 使用静态链接的方法
             else:
                 for i in range(9):
                     images_path_list.append(["empty", "blank.jpg", "/assets/src-images/blank.jpg"])
@@ -156,7 +190,7 @@ def index(request):
 
             print(context["images_path"])
 
-            return render(request, "product_display_app/product_display/product_display.html", context=context)
+            return render(request, "product_display_app/product_display/product_display_new.html", context=context)
 
     elif request.method == "POST":
         return HttpResponse("POST Defined")
