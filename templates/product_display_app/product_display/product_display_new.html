@@ -99,9 +99,21 @@
                         {% endfor %}
                     {% elif get_para == 1 %}
                         {% for k,v in info.items %}
-                            <div class={{ k }}>{{ v.0 }} 
-                                <span>{{ v.1 }}</span>
-                            </div>
+                            {% if v.0 != '同款: ' %}
+                                <div class={{ k }}>{{ v.0 }}
+                                    <span>{{ v.1 }}</span>
+                                </div>
+                            {% elif v.0 == '同款: ' and v.1 == '0' %}    
+                                <div class={{ k }}>{{ v.0 }}
+                                    <span>{{ v.1 }}</span>
+                                </div>
+                            {% else %}
+                                <div class={{ k }}>{{ v.0 }}
+                                    <a href="{{ list_address }}">
+                                        <span style="color: darkcyan">{{ v.1 }}</span>
+                                    </a>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 </div>

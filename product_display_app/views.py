@@ -169,7 +169,7 @@ def index(request):
                 for i in range(9):
                     images_path_list.append(["empty", "blank.jpg", "/assets/src-images/blank.jpg"])
 
-            print(len(images_path_list))
+            # print(len(images_path_list))
 
             # 如果图片数量小于9, 则计算剩余的空白图片数量
             surplus = 9 - len(images_path_list)
@@ -186,6 +186,7 @@ def index(request):
                 "numbers_image": range(9),
                 "surplus_image": surplus,
                 "numbers_info": range(12),
+                "list_address": request.scheme + "://" + request.get_host() + "/product_display/tmzs/list/" + info_dict["same_style"][1],
             }
 
             print(context["images_path"])
@@ -212,4 +213,22 @@ def image_display(request, group_sn, path_image):
         return render(request, 'product_display_app/image_display/image_display.html', context=context)
 
 
+def list_display(request, group_sn):
+    # print(request.scheme)
+    # print(request.get_host())
+    # print(group_sn)
+
+    result = SameStyle_Detail.objects.filter(same_style=group_sn).values()
+
+    for i in result:
+        g_sn = i["group_sn"]
+        i["link"] = request.scheme + "://" + request.get_host() + "/product_display/tmzs?gjm=" + g_sn + "&sptm=&ftm="
+
+    content = {
+        "item_list": result
+    }
+
+    # print(result)
+
+    return render(request, 'product_display_app/list_display/list_display.html', context=content)
 

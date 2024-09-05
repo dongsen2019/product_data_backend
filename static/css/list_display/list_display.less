@@ -1,0 +1,306 @@
+@import "../../css/BaseCss/base_css.css";
+@import "../../config/Color/color.less";
+
+/*外层容器*/
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: darkcyan;
+
+  display: flex;
+
+  /*左侧导航栏区域*/
+  /*左侧导航栏区域*/
+  .left-nav-bar {
+    height: 100vh;
+    width: 136px;
+    background-color: @themeColor;
+
+
+    /*左侧导航栏的标题图标区域*/
+    &>.title {
+      width: 100%;
+      height: 46px;
+      background-color: transparent;
+      text-align: center;
+
+      &>img.font-pic {
+        width: 136px;
+        height: 46px;
+        background-color: transparent;
+      }
+    }
+
+    /*ul去除样式*/
+    &>.category>.nbf {
+      list-style: none;
+      /*background-color: salmon;*/
+      margin: 0;
+      padding: 0;
+
+      /*ul列表li标签的样式*/
+      li {
+        display: block;
+        width: 100%;
+        height: 40px;
+        /*background-color: #ffffff;*/
+        margin-bottom: 20px;
+
+        cursor: pointer;
+
+        /*去除a标签的下划线*/
+        a {
+          text-decoration: none;
+        }
+
+        /*当前功能更换背景色和字体色*/
+        &.current-func {
+          background-color: rgb(51,112,255);
+          span {
+            color: white;
+          }
+        }
+
+        /*ul列表li标签光标在区域内时变色*/
+        &:hover {
+          background-color: rgb(32,54,116);
+        }
+
+        &:hover span {
+          color: #ffffff;
+        }
+
+        /*第一个li标签的上外边距单独设置*/
+        &.user_management {
+          margin-top: 10px;
+        }
+
+        /*导航栏第一个功能的图标*/
+        img {
+          /*margin-top: 8px;*/
+          margin-left: 12px;
+          margin-right: 6px;
+          width: 20px;
+          height: 20px;
+          /*background-color: lightgreen;*/
+          vertical-align: middle;
+        }
+
+        span {
+          /*display: inline-block;*/
+          /*width: 70px;*/
+          /*height: 40px;*/
+          /*background-color: tomato;*/
+          font-size: 14px;
+          font-family: "PingFang SC","微软雅黑",sans-serif;
+          color: rgb(186,187,196);
+          /*vertical-align: top;*/
+          line-height: 40px;
+        }
+      }
+    }
+  }
+
+  /*右侧页面区域*/
+  .right-page {
+    height: 100%;
+    background-color: rgb(242,247,255);
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    /*页面区域的头部*/
+    /*页面区域的头部*/
+    .page-head {
+      height: 46px;
+      width: 100%;
+      background-color: #ffffff;
+      border-bottom: 2px solid rgb(233,237,242);
+
+      position: fixed;
+      //top: 12px;
+      //margin-left: 20px;
+
+      overflow: hidden;
+
+      z-index: 99;
+
+      /*右侧展示区域的头部 功能名称区域*/
+      &>.func-name {
+        width: 61px;
+        height: 20px;
+        /*background-color: #cccccc;*/
+
+        //margin-top: 13px;
+        //margin-left: 20px;
+
+        /*功能名称前的小蓝标*/
+        &::before {
+          content: "";
+          width: 3.5px;
+          height: 12px;
+          display: block;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 20px;
+
+          border-radius: 17px;
+          margin-right: 5.5px;
+          background-color: rgb(51,112,255);
+        }
+
+        /*功能名称span标签*/
+        &>span {
+          height: 20px;
+          display: block;
+
+          position: absolute;
+          left:30px;
+          top: 50%;
+          transform: translateY(-50%);
+
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          font-family: "PingFang SC","微软雅黑",sans-serif;
+          line-height: 20px;
+          color: rgb(78,89,105);
+        }
+      }
+    }
+
+    /*页面区域下部,展示区域*/
+    &>.product-display {
+      width: 100%;
+      height: 900px;
+      background-color: rgb(248,250,254);
+
+      flex: 1;
+
+      position: relative; /*该元素子元素为绝对定位*/
+
+      .title {
+        width: 200px;
+        height: 50px;
+        text-align: center;
+
+
+        font-size: 26px;
+        font-weight: bolder;
+        margin: 100px auto 30px;
+      }
+
+      .items {
+        background-color: transparent;
+        .course-dg {
+          background-color: #FFFFFF;
+          width: 75%;
+          margin: auto;
+          //height: 200px;
+
+          &.no-view {
+            .c-view {
+              display: none;
+            }
+          }
+
+          .dg {
+            position: relative;
+
+            &::before {
+              content: "";
+              display: block;
+              width: 1px;
+              height: 100%;
+              background-color: #b4b7be;
+
+              position: absolute;
+              top: 0;
+              left: 99px;
+            }
+
+            li {
+              height: 38px;
+              display: flex;
+              align-items: center;
+              padding: 0 30px;
+              cursor: pointer;
+
+              &:hover {
+                background-color: rgba(255, 63, 41, 0.1);
+              }
+
+              .c-num {
+                width: 60px;
+                height: 38px;
+                line-height: 38px;
+                color: #b4b7be;
+                font-size: 14px;
+                text-align: left;
+              }
+
+              .c-progress {
+                width: 19px;
+                height: 19px;
+                background-color: #fff;
+                z-index: 99;
+
+                background-image: url("../../assets/images/listIcons.png");
+                background-position: -136px -80px;
+                //background-position: -200px -80px;
+
+                &.finished {
+                  background-position: -200px -80px;
+                }
+
+                &.part-finished {
+                  background-position: -168px -80px;
+                }
+              }
+
+              .c-title {
+                flex: 1;
+
+                line-height: 38px;
+                color: #585c67;
+                font-size: 14px;
+                padding-left: 8px;
+
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+
+              .c-view {
+                //display: block; 当祖先元素设置no-view时,这个属性会覆盖掉,flex布局无视显示模式
+
+                width: 90px;
+                height: 34px;
+                line-height: 34px;
+                color: #FFFFFF;
+                font-size: 12px;
+
+                text-align: center;
+                cursor: pointer;
+
+                background-color: @themeColor;
+                background-image: url("../../assets/images/button.png");
+                background-position: -40px -100px;
+
+                &:hover {
+                  background-color: @themeColor;
+                  background-image: url("../../assets/images/button.png");
+                  background-position: -40px -49px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
