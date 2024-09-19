@@ -20,7 +20,7 @@ def index(request):
 
         info_empty = {"name": ("", ""), "group_sn": ("国际码: ", ""), "brand_alias": ("品牌别名: ", ""),
                       "dept_name": ("大类: ", ""), "big_category_name": ("中类: ", ""),
-                      "small_category_name": ("小类: ", ""), "col": ("颜色:", ""), "season": ("季节", ""),
+                      "small_category_name": ("小类: ", ""), "same_style": ("同款: ", ""), "col": ("颜色:", ""), "season": ("季节", ""),
                       "gender": ("性别: ", ""), "market_price": ("市场价: ", "")}
 
         # 当 GET 参数为空 或者 无GET参数(字典为空时)
@@ -41,8 +41,7 @@ def index(request):
         else:
 
             # 原生sql语句查询
-            g_sn = gjm
-            result = PDC.objects.raw("SELECT * FROM (SELECT * FROM product_display_app_pdc t1 where group_sn = %s limit 1) t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn", [g_sn])
+            result = PDC.objects.raw("SELECT * FROM (SELECT * FROM product_display_app_pdc t1 where group_sn = %s or barcode = %s or parent_barcode = %s limit 1) t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn", [gjm, sptm, ftm])
             print(len(result))
             for i in result:
                 print(i.same_style)
@@ -121,18 +120,25 @@ def index(request):
                     "market_price": ("市场价: ", result[0].market_price),
                 }
 
-            # print(info_dict)
+            print(info_dict)
+
+            print(info_dict["same_style"])
+
 
             # 取商品图片
+            if len(result) == 0:
+                g_sn = "exist_false"
+            else:
+                g_sn = result[0].group_sn
 
             # 绝对路径
             # print(os.path.join(settings.STATICFILES_DIRS[0], "assets", "product_images", product_info.get("group_sn")))
 
             # 相对路径
             # 静态static路径千万记得要 /static 别忘了加前面的斜杠
-            print(os.path.isdir(os.path.join(settings.STATIC_URL, "assets", "product_images", result[0].group_sn)))
-            images_path = os.path.join(settings.STATIC_URL, "assets", "product_images", result[0].group_sn, "750")
-            static_images_path = os.path.join("assets", "product_images", result[0].group_sn, "750")
+            print(os.path.isdir(os.path.join(settings.STATIC_URL, "assets", "product_images", g_sn)))
+            images_path = os.path.join(settings.STATIC_URL, "assets", "product_images", g_sn, "750")
+            static_images_path = os.path.join("assets", "product_images", g_sn, "750")
             is_exists = os.path.isdir(images_path)
 
             # 如果路径的存在,获取路径下的所有文件
@@ -169,7 +175,7 @@ def index(request):
                 for i in range(9):
                     images_path_list.append(["empty", "blank.jpg", "/assets/src-images/blank.jpg"])
 
-            # print(len(images_path_list))
+            print(len(images_path_list))
 
             # 如果图片数量小于9, 则计算剩余的空白图片数量
             surplus = 9 - len(images_path_list)
@@ -189,7 +195,7 @@ def index(request):
                 "list_address": request.scheme + "://" + request.get_host() + "/product_display/tmzs/list/" + info_dict["same_style"][1],
             }
 
-            print(context["images_path"])
+            # print(context["images_path"])
 
             return render(request, "product_display_app/product_display/product_display_new.html", context=context)
 
