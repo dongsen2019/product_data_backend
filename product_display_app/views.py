@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from product_display_app.models import *
 from django.db.models import Q
+from django.db import connection
 import os
 from product_data_backend import settings
 
@@ -29,9 +30,6 @@ def index(request):
                 "get_para": 0,
                 "images_path": ["/static/assets/src-images/blank.jpg" for i in range(9)],
                 "info": info_empty,
-                # "map": {"name": "", "barcode": "商品条码", "group_sn": "国际码", "brand_alias": "品牌别名", "dept_name": "大类",
-                #         "big_category": "中类", "small_category": "小类", "col": "颜色", "size": "尺寸", "season": "季节",
-                #         "gender": "性别", "market_price": "市场价"},
                 "numbers_image": range(9),
                 "numbers_info": range(12),
             }
@@ -39,12 +37,56 @@ def index(request):
             return render(request, "product_display_app/product_display/product_display_new.html", context=context)
 
         else:
+            print(gjm, sptm, ftm)
+
+            params = []
+            params_sql = ""
+
+            if gjm != "":
+                params_sql += " and group_sn = %s "
+                params.append(gjm)
+            else:
+                params_sql += " and 1=1"
+
+            if sptm != "":
+                params_sql += " and barcode = %s "
+                params.append(sptm)
+            else:
+                params_sql += " and 1=1"
+
+            if ftm != "":
+                params_sql += " and parent_barcode = %s "
+                params.append(ftm)
+            else:
+                params_sql += " and 1=1"
+
+            print(params_sql)
+            print(params)
+
+            # print("SELECT * FROM (SELECT * FROM product_display_app_pdc t1 where {} and  {} and  {} limit 1) t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn".format(Q_gjm, Q_sptm, Q_ftm))
 
             # 原生sql语句查询
-            result = PDC.objects.raw("SELECT * FROM (SELECT * FROM product_display_app_pdc t1 where group_sn = %s or barcode = %s or parent_barcode = %s limit 1) t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn", [gjm, sptm, ftm])
-            print(len(result))
-            for i in result:
-                print(i.same_style)
+            # result = PDC.objects.raw("SELECT * FROM (SELECT * FROM product_display_app_pdc t1 where group_sn = %s and  %s and  %s limit 1) t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn", [Q_gjm, Q_sptm, Q_ftm])
+            # print(len(result))
+            # for i in result:
+            #     print(i.same_style)
+
+            query_sql_s = " SELECT * FROM (SELECT * FROM product_display_app_pdc "
+            query_sql_e = ") t1 left join product_display_app_samestyle_detail t2 on t1.group_sn = t2.group_sn limit 1 "
+            params_sql = "where 1=1 " + params_sql
+
+            query_sql = query_sql_s + params_sql + query_sql_e
+
+            print(query_sql)
+
+            # 原生sql语句查询
+            with connection.cursor() as cursor:
+                cursor.execute(query_sql, params)
+                columns = [col[0] for col in cursor.description]
+                result = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+            print("len:", len(result))
+            # print("result_2:", result)
 
             """
             # 使用django的queryset查询
@@ -102,34 +144,33 @@ def index(request):
                 }
                 """
                 info_dict = {
-                    "name": ("", result[0].name),
-                    "group_sn": ("国际码: ", result[0].group_sn),
-                    "brand_alias": ("品牌别名: ", result[0].brand_alias),
-                    "dept_name": ("大类: ", result[0].dept_name),
+                    "name": ("", result[0].get('name')),
+                    "group_sn": ("国际码: ", result[0].get('group_sn')),
+                    "brand_alias": ("品牌别名: ", result[0].get('brand_alias')),
+                    "dept_name": ("大类: ", result[0].get('dept_name')),
                     # "big_category_name": ("中类: ", result[0].big_category_name),
-                    "small_category_name": ("小类: ", result[0].small_category_name),
-                    "size": ("尺寸: ", result[0].size),
-                    "same_style": ("同款: ", result[0].same_style),
-                    "mark": ("标识: ", result[0].mark),
-                    "is_double": ("双面: ", result[0].is_double),
-                    "disassembly": ("扣头是否拆卸: ", result[0].disassembly),
-                    "length": ("长短: ", result[0].length),
-                    "col": ("颜色:", result[0].col),
-                    "season": ("季节: ", result[0].season),
-                    "gender": ("性别: ", result[0].gender),
-                    "market_price": ("市场价: ", result[0].market_price),
+                    "small_category_name": ("小类: ", result[0].get('small_category_name')),
+                    "size": ("尺寸: ", result[0].get('size')),
+                    "same_style": ("同款: ", result[0].get('same_style')),
+                    "mark": ("标识: ", result[0].get('mark')),
+                    "is_double": ("双面: ", result[0].get('is_double')),
+                    "disassembly": ("扣头是否拆卸: ", result[0].get('disassembly')),
+                    "length": ("长短: ", result[0].get('length')),
+                    "col": ("颜色:", result[0].get('col')),
+                    "season": ("季节: ", result[0].get('season')),
+                    "gender": ("性别: ", result[0].get('gender')),
+                    "market_price": ("市场价: ", result[0].get('market_price')),
                 }
 
             print(info_dict)
 
             print(info_dict["same_style"])
 
-
             # 取商品图片
             if len(result) == 0:
                 g_sn = "exist_false"
             else:
-                g_sn = result[0].group_sn
+                g_sn = result[0].get('group_sn')
 
             # 绝对路径
             # print(os.path.join(settings.STATICFILES_DIRS[0], "assets", "product_images", product_info.get("group_sn")))
@@ -170,7 +211,7 @@ def index(request):
 
                 for image_i in range(images_count):
                     # images_path_list.append(os.path.join("/", images_path, images_list[image_i]))
-                    images_path_list.append([result[0].group_sn, images_list[image_i], os.path.join(static_images_path, images_list[image_i])])  # 使用静态链接的方法
+                    images_path_list.append([result[0].get('group_sn'), images_list[image_i], os.path.join(static_images_path, images_list[image_i])])  # 使用静态链接的方法
             else:
                 for i in range(9):
                     images_path_list.append(["empty", "blank.jpg", "/assets/src-images/blank.jpg"])
