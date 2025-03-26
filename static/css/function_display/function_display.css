@@ -1,0 +1,172 @@
+@import "../../css/BaseCss/base_css.css";
+/*外层容器*/
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: darkcyan;
+  display: flex;
+  /*左侧导航栏区域*/
+  /*左侧导航栏区域*/
+  /*右侧页面区域*/
+}
+.container .left-nav-bar {
+  height: 100vh;
+  width: 136px;
+  background-color: #181c38;
+  /*左侧导航栏的标题图标区域*/
+  /*ul去除样式*/
+}
+.container .left-nav-bar > .title {
+  width: 100%;
+  height: 46px;
+  background-color: transparent;
+  text-align: center;
+}
+.container .left-nav-bar > .title > img.font-pic {
+  width: 136px;
+  height: 46px;
+  background-color: transparent;
+}
+.container .left-nav-bar > .category > .nbf {
+  list-style: none;
+  /*background-color: salmon;*/
+  margin: 0;
+  padding: 0;
+  /*ul列表li标签的样式*/
+}
+.container .left-nav-bar > .category > .nbf li {
+  display: block;
+  width: 100%;
+  height: 40px;
+  /*background-color: #ffffff;*/
+  margin-bottom: 20px;
+  cursor: pointer;
+  /*去除a标签的下划线*/
+  /*当前功能更换背景色和字体色*/
+  /*ul列表li标签光标在区域内时变色*/
+  /*第一个li标签的上外边距单独设置*/
+  /*导航栏第一个功能的图标*/
+}
+.container .left-nav-bar > .category > .nbf li a {
+  text-decoration: none;
+}
+.container .left-nav-bar > .category > .nbf li.current-func {
+  background-color: #3370ff;
+}
+.container .left-nav-bar > .category > .nbf li.current-func span {
+  color: white;
+}
+.container .left-nav-bar > .category > .nbf li:hover {
+  background-color: #203674;
+}
+.container .left-nav-bar > .category > .nbf li:hover span {
+  color: #ffffff;
+}
+.container .left-nav-bar > .category > .nbf li.user_management {
+  margin-top: 10px;
+}
+.container .left-nav-bar > .category > .nbf li img {
+  /*margin-top: 8px;*/
+  margin-left: 12px;
+  margin-right: 6px;
+  width: 20px;
+  height: 20px;
+  /*background-color: lightgreen;*/
+  vertical-align: middle;
+}
+.container .left-nav-bar > .category > .nbf li span {
+  /*display: inline-block;*/
+  /*width: 70px;*/
+  /*height: 40px;*/
+  /*background-color: tomato;*/
+  font-size: 14px;
+  font-family: "PingFang SC", "微软雅黑", sans-serif;
+  color: #babbc4;
+  /*vertical-align: top;*/
+  line-height: 40px;
+}
+.container .right-page {
+  height: 100%;
+  background-color: #f2f7ff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /*页面区域的头部*/
+  /*页面区域的头部*/
+  /*页面区域下部,展示区域*/
+}
+.container .right-page .page-head {
+  height: 46px;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 2px solid #e9edf2;
+  position: fixed;
+  overflow: hidden;
+  z-index: 99;
+  /*右侧展示区域的头部 功能名称区域*/
+}
+.container .right-page .page-head > .func-name {
+  width: 61px;
+  height: 20px;
+  /*background-color: #cccccc;*/
+  /*功能名称前的小蓝标*/
+  /*功能名称span标签*/
+}
+.container .right-page .page-head > .func-name::before {
+  content: "";
+  width: 3.5px;
+  height: 12px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  border-radius: 17px;
+  margin-right: 5.5px;
+  background-color: #3370ff;
+}
+.container .right-page .page-head > .func-name > span {
+  height: 20px;
+  display: block;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "PingFang SC", "微软雅黑", sans-serif;
+  line-height: 20px;
+  color: #4e5969;
+}
+.container .right-page > .product-display {
+  width: 100%;
+  height: 900px;
+  background-color: #f8fafe;
+  flex: 1;
+  position: relative;
+  /*该元素子元素为绝对定位*/
+  display: flex;
+}
+.container .right-page > .product-display > div {
+  width: 128px;
+  height: 134px;
+  border: 2px solid #e9edf2;
+  background-color: #fff;
+  border-radius: 7px;
+  margin-top: 70px;
+  margin-left: 50px;
+  text-align: center;
+}
+.container .right-page > .product-display > div a {
+  text-decoration: none;
+}
+.container .right-page > .product-display > div svg {
+  display: block;
+  margin: 8px auto 11px;
+}
+.container .right-page > .product-display > div span {
+  color: black;
+  font-weight: bolder;
+}
+/*# sourceMappingURL=function_display.css.map */

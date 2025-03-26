@@ -1,0 +1,274 @@
+@import "../BaseCss/base_css.css";
+/*外层容器*/
+.container {
+  width: 100%;
+  height: 1200px;
+  background-color: darkcyan;
+  display: flex;
+  /*左侧导航栏区域*/
+  /*右侧页面区域*/
+}
+.container .left-nav-bar {
+  height: 100%;
+  width: 136px;
+  background-color: #181c38;
+  /*左侧导航栏的标题图标区域*/
+  /*ul列表li标签的样式*/
+  /*a标签去除下划线*/
+  /*导航栏第一个功能的图标*/
+  /*当前功能的li背景色变换*/
+}
+.container .left-nav-bar > .title {
+  width: 100%;
+  height: 46px;
+  background-color: transparent;
+  text-align: center;
+}
+.container .left-nav-bar > .title > img.font-pic {
+  width: 136px;
+  height: 46px;
+  background-color: transparent;
+}
+.container .left-nav-bar ul.nbf li {
+  display: block;
+  width: 100%;
+  height: 40px;
+  /*background-color: #ffffff;*/
+  margin-bottom: 20px;
+  cursor: pointer;
+  /*第一个li标签的上外边距单独设置*/
+  /*ul列表li标签光标在区域内时变色*/
+}
+.container .left-nav-bar ul.nbf li.user_management {
+  margin-top: 10px;
+}
+.container .left-nav-bar ul.nbf li.current-func {
+  /*当前功能的span字体变换*/
+}
+.container .left-nav-bar ul.nbf li.current-func span {
+  color: white;
+}
+.container .left-nav-bar ul.nbf li:hover {
+  background-color: #203674;
+}
+.container .left-nav-bar ul.nbf li:hover span {
+  color: #ffffff;
+}
+.container .left-nav-bar ul.nbf a {
+  text-decoration: none;
+}
+.container .left-nav-bar ul.nbf img {
+  /*margin-top: 8px;*/
+  margin-left: 12px;
+  margin-right: 6px;
+  width: 20px;
+  height: 20px;
+  /*background-color: lightgreen;*/
+  vertical-align: middle;
+}
+.container .left-nav-bar ul.nbf span {
+  /*display: inline-block;*/
+  /*width: 70px;*/
+  /*height: 40px;*/
+  /*background-color: tomato;*/
+  font-size: 14px;
+  font-family: "PingFang SC", "微软雅黑", sans-serif;
+  color: #babbc4;
+  /*vertical-align: top;*/
+  line-height: 40px;
+}
+.container .left-nav-bar ul.nbf > li.current-func {
+  background-color: #3370ff;
+}
+.container .right-page {
+  height: 100%;
+  background-color: #f2f7ff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /*页面区域的头部*/
+  /*参数区域的div*/
+  /*页面区域下部,展示区域*/
+}
+.container .right-page > .page-head {
+  height: 46px;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 2px solid #e9edf2;
+  position: absolute;
+  overflow: hidden;
+  z-index: 99;
+  /*右侧展示区域的头部 功能名称区域*/
+}
+.container .right-page > .page-head > .func-name {
+  width: 61px;
+  height: 20px;
+  /*background-color: #cccccc;*/
+  margin-top: 13px;
+  margin-left: 20px;
+  /*功能名称前的小蓝标*/
+  /*功能名称span标签*/
+}
+.container .right-page > .page-head > .func-name::before {
+  content: "";
+  display: inline-block;
+  width: 3.5px;
+  height: 12px;
+  border-radius: 17px;
+  margin-right: 5.5px;
+  background-color: #3370ff;
+}
+.container .right-page > .page-head > .func-name > span {
+  position: absolute;
+  height: 20px;
+  left: 30px;
+  top: 13px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "PingFang SC", "微软雅黑", sans-serif;
+  line-height: 20px;
+  color: #4e5969;
+  display: inline-flex;
+  align-items: center;
+}
+.container .right-page > .para {
+  width: 100%;
+  height: 48px;
+  background-color: white;
+  border-bottom: 2px solid #e9edf2;
+  margin-top: 48px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  /*搜索图片的 para 区域*/
+}
+.container .right-page > .para > form {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+.container .right-page > .para > form > input {
+  width: 56px;
+  height: 24px;
+  margin-left: 30px;
+  background-color: #181c38;
+  border: 1px solid #c5cddb;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+.container .right-page > .para > form > label {
+  margin-left: 30px;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "微软雅黑", sans-serif;
+}
+.container .right-page > .para > form > label > input {
+  width: 230px;
+  height: 24px;
+  border: 1px solid #c5cddb;
+  line-height: 24px;
+  border-radius: 3px;
+  font-size: 15px;
+  outline: none;
+}
+.container .right-page > .product-display {
+  width: 100%;
+  height: 900px;
+  background-color: #f8fafe;
+  flex: 1;
+  position: relative;
+  /*该元素子元素为绝对定位*/
+  display: flex;
+  /*右侧展示区域的图片展示区域*/
+  /*商品介绍区域*/
+}
+.container .right-page > .product-display > .left-space {
+  min-width: 5px;
+  height: 100%;
+  flex: 1;
+}
+.container .right-page > .product-display > .product-images {
+  width: 900px;
+  height: 900px;
+  background-color: #ffffff;
+  border: 1px solid #d4d8db;
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  /*每张图片的div样式*/
+}
+.container .right-page > .product-display > .product-images > .image-index {
+  width: 298px;
+  height: 298px;
+  /*background-color: tomato;*/
+  border: 1px solid #d4d8db;
+  /*每个img标签外嵌套a标签*/
+  /*每张图片的大小*/
+}
+.container .right-page > .product-display > .product-images > .image-index > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.container .right-page > .product-display > .product-images > .image-index:hover {
+  transform: scale(1.16, 1.16);
+}
+.container .right-page > .product-display > .product-images > .image-index img {
+  width: 100%;
+  height: 100%;
+}
+.container .right-page > .product-display > .middle-space {
+  min-width: 5px;
+  height: 100%;
+  flex: 3;
+}
+.container .right-page > .product-display > .product-intro {
+  width: 300px;
+  height: 900px;
+  border: 2px solid #d4d8db;
+  background-color: white;
+  margin-top: 60px;
+  box-sizing: border-box;
+  /*商品介绍区域内部信息*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  /*商品介绍每一行的样式设置*/
+  /*商品名称字体变大*/
+}
+.container .right-page > .product-display > .product-intro > div {
+  width: 80%;
+  height: 40px;
+  font-family: "Helvetica", "Arial", sans-serif;
+  /*border: 1px solid black;*/
+  font-size: 18px;
+  font-weight: 600;
+  font-style: oblique;
+  box-sizing: border-box;
+  line-height: 40px;
+}
+.container .right-page > .product-display > .product-intro > div span {
+  font-size: 16px;
+  font-weight: bolder;
+}
+.container .right-page > .product-display > .product-intro > div.mark span {
+  font-size: 14px;
+  font-weight: bolder;
+}
+.container .right-page > .product-display > .product-intro > div.name span {
+  font-size: 21px;
+  font-weight: bolder;
+}
+.container .right-page > .product-display > .right-space {
+  min-width: 5px;
+  height: 100%;
+  flex: 1;
+}
+/*# sourceMappingURL=list_display.css.map */
